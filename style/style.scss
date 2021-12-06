@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+
+$back-color: #fcde67;
+$object-color: #5bccf6;
+$black-color: #030e12;
+$default-font : 'Orbitron', sans-serif;
+
+
+*{
+    margin: 0;
+}
+
+body{
+    background-color: $back-color;
+}
+
+.app{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+
+    display: block;
+
+    background-color: white;
+
+    width: 600px;
+
+    height: 15vh;
+
+    border-radius: 20px;
+
+    ul{
+        display: flex;
+
+        list-style: none;
+
+        justify-content: space-around;
+
+        align-items: center;
+
+        vertical-align: middle;
+
+        height: 15vh;
+
+        position: relative;
+
+        li{
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            vertical-align: middle;
+
+            width: 20%;
+
+            cursor: pointer;
+
+
+            div{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                justify-content: center;
+
+                position: relative;
+
+                z-index: 1;
+
+                img{
+                    width: 50px;
+                    
+                    line-height: 20px;
+                    transition: transform 0.5s;
+                }
+
+                span{
+                    position: absolute;
+                    opacity: 0;
+                    letter-spacing: 0.05em;
+                    transition: all 0.5s;
+                    font-family: $default-font;
+                    transform: translateY(20px);
+
+                }
+
+
+            }
+
+            div:hover img{
+                transform: translateY(-60px);
+            }
+    
+            div:hover span{
+                opacity: 1;
+                transform: translateY(10px);
+            }
+
+        }
+
+    }
+}
+
+.indicator{
+    position: absolute;
+    background-color: $object-color;
+
+    width: 90px;
+    height: 90px;
+
+    top:-40%;
+
+    border-radius: 100px;
+
+    border: 8px solid $back-color;
+
+    transform: translateX(-224px);
+
+    transition: all 1s;
+
+}
+
+.indicator::before{
+    content: "";
+    position: absolute;
+
+    width: 25px;
+    height: 25px;
+
+    background: white;
+
+    top:40px;
+    left: -30px;
+
+    border-top-right-radius: 25px;
+
+    box-shadow: 0px -12px 0px 0px $back-color;
+}
+
+.indicator::after{
+    content: "";
+    position: absolute;
+
+    width: 25px;
+    height: 25px;
+
+    background: white;
+
+    top:40px;
+    left: 96px;
+
+    border-top-left-radius: 25px;
+
+    box-shadow: -4px -8px 0px 0px $back-color;
+
+}
+
+@for $i from 1 through 5 {
+    .list:nth-child(#{$i}).active ~ .indicator{
+        transform: translateX(calc(-224px + (110px * (#{$i} - 1))));
+    }
+}
